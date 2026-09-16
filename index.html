@@ -371,16 +371,41 @@
             isPlaying = !isPlaying;
         });
 
-        // --- 3. التعامل مع نموذج تأكيد الحضور (RSVP) ---
-        document.getElementById("rsvpForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-            
-            // هنا يمكنك ربط البيانات بـ Google Sheets أو إرسالها لـ Email
-            
-            // إخفاء النموذج وإظهار رسالة الشكر
-            this.style.display = "none";
-            document.getElementById("success-message").style.display = "block";
-        });
+      // --- التعامل مع نموذج تأكيد الحضور (RSVP) وتخزينه في Google Sheets ---
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzY6FXLKbcoZz7VAcf7hijeGPrxGK6K7iKDRjoPh9Y1lK-YB_bB9Kzz7zlDmFDMhmfr/exec';
+
+document.getElementById("rsvpForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    
+    const submitBtn = this.querySelector('button[type="submit"]');
+    submitBtn.innerText = "جاري الإرسال...";
+    submitBtn.disabled = true;
+
+    const data = {
+        name: document.getElementById("name").value,
+        status: document.getElementById("status").value,
+        guests: document.getElementById("guests").value
+    };
+
+    fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        document.getElementById("rsvpForm").style.display = "none";
+        document.getElementById("success-message").style.display = "block";
+    })
+    .catch(error => {
+        console.error('Error!', error.message);
+        alert('حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى.');
+        submitBtn.innerText = "إرسال التأكيد";
+        submitBtn.disabled = false;
+    });
+});
 
         // --- 4. نسخ رابط الصفحة ---
         function copyLink() {
