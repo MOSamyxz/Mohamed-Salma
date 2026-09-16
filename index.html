@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة زفاف [اسم العريس] & [اسم العروس]</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #c5a059;
+            --secondary-color: #8c6d37;
+            --bg-color: #fdfbf7;
+            --card-bg: #ffffff;
+            --text-color: #4a4a4a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Music Toggle Button */
+        .music-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            z-index: 1000;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        .music-btn:hover { transform: scale(1.1); }
+
+        /* Header / Hero Section */
+        .hero {
+            padding: 80px 20px 60px;
+            background: linear-gradient(rgba(253, 251, 247, 0.85), rgba(253, 251, 247, 0.85)), 
+                        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .hero p.bismillah {
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-family: 'Amiri', serif;
+            font-size: 3.2rem;
+            color: var(--primary-color);
+            margin: 15px 0;
+            line-height: 1.2;
+        }
+
+        .hero p.subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* Card Container */
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 1px solid #f0e6d2;
+        }
+
+        .card h2 {
+            font-family: 'Amiri', serif;
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .card h2::after {
+            content: "🌸";
+            display: block;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        /* Countdown Timer */
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .time-box {
+            background: #faf4e8;
+            padding: 12px;
+            border-radius: 10px;
+            min-width: 70px;
+            border: 1px solid var(--primary-color);
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .time-box label {
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        /* Details Section */
+        .info-item {
+            margin: 15px 0;
+            font-size: 1.1rem;
+        }
+
+        .info-item i {
+            color: var(--primary-color);
+            margin-left: 8px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3);
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* RSVP Form */
+        .form-group {
+            margin-bottom: 15px;
+            text-align: right;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* Success Message */
+        #success-message {
+            display: none;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            padding: 30px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        @media (max-width: 500px) {
+            .hero h1 { font-size: 2.3rem; }
+            .timer-container { gap: 8px; }
+            .time-box { min-width: 55px; padding: 8px; }
+            .time-box span { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- أزرار التحكم بالصوت -->
+    <button class="music-btn" id="musicToggle" title="تشغيل / إيقاف الموسيقى">
+        <i class="fas fa-music"></i>
+    </button>
+    <audio id="weddingMusic" loop>
+        <!-- يمكنك تغيير رابط الصوت بأي رابط mp3 لموسيقى هادئة -->
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- الواجهة الرئيسية -->
+    <section class="hero">
+        <p class="bismillah">بسم الله الرحمن الرحيم</p>
+        <p>«وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا»</p>
+        <h1>محمد & سلمى</h1>
+        <p class="subtitle">يتشرفان بدعوتكم لحضور حفل زفافهما المبارك</p>
+    </section>
+
+    <div class="container">
+
+        <!-- العداد التنازلي -->
+        <div class="card">
+            <h2>المتبقي على يومنا المميز</h2>
+            <div class="timer-container">
+                <div class="time-box"><span id="days">00</span><label>يوم</label></div>
+                <div class="time-box"><span id="hours">00</span><label>ساعة</label></div>
+                <div class="time-box"><span id="minutes">00</span><label>دقيقة</label></div>
+                <div class="time-box"><span id="seconds">00</span><label>ثانية</label></div>
+            </div>
+        </div>
+
+        <!-- تفاصيل الموعد والمكان -->
+        <div class="card">
+            <h2>تفاصيل الحفل</h2>
+            <div class="info-item">
+                <i class="far fa-calendar-alt"></i>
+                <strong>التاريخ:</strong> الجمعة, 6 نوفمبر 2026
+            </div>
+            <div class="info-item">
+                <i class="far fa-clock"></i>
+                <strong>الوقت:</strong> الساعة 8:00 مساءً
+            </div>
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <strong>المكان:</strong> قاعه افراح مملكه حمزه
+            </div>
+            <!-- ضع رابط موقع القاعة الحقيقي من Google Maps هنا -->
+            <a href="https://maps.app.goo.gl/FnuuNzKx1ArR3Uew5" target="_blank" class="btn">
+                <i class="fas fa-location-arrow"></i> فتح الموقع في الخريطة
+            </a>
+        </div>
+
+        <!-- استمارة تأكيد الحضور (RSVP) -->
+        <div class="card">
+            <h2>تأكيد الحضور (RSVP)</h2>
+            <p style="margin-bottom: 20px; font-size: 0.95rem;">يرجى تأكيد حضوركم لمساعدتنا في الترتيبات</p>
+
+            <form id="rsvpForm">
+                <div class="form-group">
+                    <label for="name">الاسم الكريم:</label>
+                    <input type="text" id="name" class="form-control" placeholder="أدخل اسمك الكامل" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">هل ستكون معنا؟</label>
+                    <select id="status" class="form-control" required>
+                        <option value="حضور">يشرفني الحضور بكل سرور ✨</option>
+                        <option value="اعتذار">أعتذر عن الحضور، مع أطيب التمنيات ❤️</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="guests">عدد المرافقين:</label>
+
+                    <select id="guests" class="form-control">
+                        <option value="0">بدون مرافقين</option>
+                        <option value="1">1 مرافق</option>
+                        <option value="2">2 مرافقين</option>
+                        <option value="3">3 مرافقين أو أكثر</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn">إرسال التأكيد</button>
+            </form>
+
+            <div id="success-message">
+                شكراً لك! تم استلام تأكيد الحضور بنجاح. ننتظر رؤيتك بشغف! ❤️
+            </div>
+        </div>
+
+        <!-- زر مشاركة الدعوة -->
+        <div class="card">
+            <h2>مشاركة الدعوة</h2>
+            <p>شارك هذه اللحظة مع الأهل والأصدقاء</p>
+            <button class="btn" onclick="copyLink()">
+                <i class="fas fa-share-alt"></i> نسخ رابط الدعوة
+            </button>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>ننتظركم لكتمل فرحتنا 🎉</p>
+        <p style="margin-top: 5px;">[أسماء العائلتين]</p>
+    </footer>
+
+    <script>
+        // --- 1. العداد التنازلي ---
+        // حدد تاريخ الزفاف هنا (السنة، الشهر -1، اليوم، الساعة)
+        const weddingDate = new Date(2026, 10, 6, 20, 0, 0).getTime(); // 15 أكتوبر 2026 الساعة 7 مساءً
+
+        const countdown = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.querySelector(".timer-container").innerHTML = "<h3>أهلاً بكم في يومنا المميز! 🎉</h3>";
+            }
+        }, 1000);
+
+        // --- 2. التحكم في الموسيقى ---
+        const music = document.getElementById("weddingMusic");
+        const musicBtn = document.getElementById("musicToggle");
+        let isPlaying = false;
+
+        musicBtn.addEventListener("click", function() {
+            if (isPlaying) {
+                music.pause();
+                musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+            } else {
+                music.play();
+                musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // --- 3. التعامل مع نموذج تأكيد الحضور (RSVP) ---
+        document.getElementById("rsvpForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            // هنا يمكنك ربط البيانات بـ Google Sheets أو إرسالها لـ Email
+            
+            // إخفاء النموذج وإظهار رسالة الشكر
+            this.style.display = "none";
+            document.getElementById("success-message").style.display = "block";
+        });
+
+        // --- 4. نسخ رابط الصفحة ---
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href);
+            alert("تم نسخ رابط الدعوة بنجاح! يمكنك الآن إرساله عبر واتساب.");
+        }
+    </script>
+</body>
+</html>
